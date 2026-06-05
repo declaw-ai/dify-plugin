@@ -23,7 +23,7 @@ class ListFilesTool(Tool):
             {
                 "path": path,
                 "entries": [
-                    {"name": e.name, "type": e.type} for e in entries
+                    {"name": e.name, "type": e.type.value} for e in entries
                 ],
             }
         )

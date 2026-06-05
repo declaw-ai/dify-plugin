@@ -4,6 +4,7 @@ from typing import Any
 from dify_plugin import Tool
 from dify_plugin.entities.tool import ToolInvokeMessage
 from declaw import Sandbox
+from declaw.security import SecurityPolicy, PIIConfig, InjectionDefenseConfig, AuditConfig
 
 
 class CreateSandboxTool(Tool):
@@ -27,25 +28,18 @@ class CreateSandboxTool(Tool):
             kwargs["domain"] = domain
 
         if preset != "none":
-            security: dict[str, Any] = {
-                "pii": {"enabled": True},
-                "audit": True,
-            }
-            if preset == "strict":
-                security["injection_defense"] = {"enabled": True}
-            kwargs["security"] = security
+            kwargs["security"] = SecurityPolicy(
+                pii=PIIConfig(enabled=True),
+                injection_defense=InjectionDefenseConfig(enabled=(preset == "strict")),
+                audit=AuditConfig(enabled=True),
+            )
 
         if allowed_domains_str:
             domains = [d.strip() for d in allowed_domains_str.split(",") if d.strip()]
             if domains:
-                kwargs["network"] = {
-                    "policy": "egress",
-                    "allowed_egress_destinations": [
-                        {"protocol": "tcp", "host": d, "port": 443} for d in domains
-                    ],
-                }
+                kwargs["network"] = {"allow_out": domains}
         elif preset == "strict":
-            kwargs["network"] = {"policy": "deny-all"}
+            kwargs["network"] = {"deny_out": ["0.0.0.0/0"]}
 
         sbx = Sandbox.create(**kwargs)
 
