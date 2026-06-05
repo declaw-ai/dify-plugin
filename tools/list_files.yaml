@@ -1,32 +1,28 @@
-identity:
-  name: list_files
-  author: declaw
-  label:
-    en_US: List Files
-
 description:
   human:
     en_US: List files and directories at a given path in a Declaw sandbox.
   llm: List files and directories at a path in a sandbox.
-
+extra:
+  python:
+    source: tools/list_files.py
+identity:
+  author: declaw
+  label:
+    en_US: List Files
+  name: list_files
 parameters:
   - name: sandbox_id
     type: string
     required: true
+    form: llm
     label:
       en_US: Sandbox ID
     llm_description: Sandbox ID returned by create_sandbox.
-    form: llm
-
   - name: path
     type: string
     required: false
     default: /
+    form: llm
     label:
       en_US: Directory Path
     llm_description: Directory path to list. Default is /.
-    form: llm
-
-extra:
-  python:
-    source: tools/list_files.py

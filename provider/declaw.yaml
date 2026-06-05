@@ -1,17 +1,3 @@
-identity:
-  author: declaw
-  name: declaw
-  label:
-    en_US: Declaw
-  description:
-    en_US: >-
-      Secure runtime for AI agents. Create isolated Firecracker microVM
-      sandboxes with network policies, PII scanning, injection defense,
-      and audit logging.
-  icon: ../_assets/icon.svg
-  tags:
-    - utilities
-
 credentials_for_provider:
   declaw_api_key:
     type: secret-input
@@ -32,7 +18,22 @@ credentials_for_provider:
       en_US: api.declaw.ai
     help:
       en_US: Custom domain for on-prem deployments. Leave empty for Declaw Cloud.
-
+extra:
+  python:
+    source: provider/declaw.py
+identity:
+  author: declaw
+  description:
+    en_US: >-
+      Secure runtime for AI agents. Create isolated Firecracker microVM
+      sandboxes with network policies, PII scanning, injection defense,
+      and audit logging.
+  icon: icon.svg
+  label:
+    en_US: Declaw
+  name: declaw
+  tags:
+    - utilities
 tools:
   - tools/create_sandbox.yaml
   - tools/run_command.yaml
@@ -41,7 +42,3 @@ tools:
   - tools/list_files.yaml
   - tools/kill_sandbox.yaml
   - tools/list_sandboxes.yaml
-
-extra:
-  python:
-    source: declaw.py

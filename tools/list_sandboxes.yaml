@@ -1,16 +1,13 @@
-identity:
-  name: list_sandboxes
-  author: declaw
-  label:
-    en_US: List Sandboxes
-
 description:
   human:
     en_US: List all active sandboxes for the current Declaw API key.
   llm: List all active sandboxes. Returns sandbox IDs, templates, and states.
-
-parameters: []
-
 extra:
   python:
     source: tools/list_sandboxes.py
+identity:
+  author: declaw
+  label:
+    en_US: List Sandboxes
+  name: list_sandboxes
+parameters: []

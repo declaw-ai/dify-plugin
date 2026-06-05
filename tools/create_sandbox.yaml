@@ -1,9 +1,3 @@
-identity:
-  name: create_sandbox
-  author: declaw
-  label:
-    en_US: Create Sandbox
-
 description:
   human:
     en_US: Create a new secure sandbox environment with configurable security policies.
@@ -12,12 +6,20 @@ description:
     to use with other Declaw tools (run_command, read_file, write_file, etc.).
     Choose a security preset to control PII scanning, injection defense, and
     network policies.
-
+extra:
+  python:
+    source: tools/create_sandbox.py
+identity:
+  author: declaw
+  label:
+    en_US: Create Sandbox
+  name: create_sandbox
 parameters:
   - name: template
     type: select
     required: false
     default: base
+    form: llm
     label:
       en_US: Template
     human_description:
@@ -25,7 +27,6 @@ parameters:
     llm_description: >-
       Sandbox template. Use "base" for shell only, "python" for Python,
       "node" for Node.js, "code-interpreter" for Jupyter-style execution.
-    form: llm
     options:
       - value: base
         label:
@@ -51,24 +52,23 @@ parameters:
       - value: devops
         label:
           en_US: DevOps
-
   - name: timeout
     type: number
     required: false
     default: 300
+    form: llm
     label:
       en_US: Timeout (seconds)
     human_description:
-      en_US: Sandbox timeout in seconds (10–86400).
+      en_US: Sandbox timeout in seconds (10-86400).
     llm_description: Sandbox timeout in seconds. Default 300 (5 minutes).
-    form: llm
     min: 10
     max: 86400
-
   - name: security_preset
     type: select
     required: false
     default: standard
+    form: llm
     label:
       en_US: Security Preset
     human_description:
@@ -76,7 +76,6 @@ parameters:
     llm_description: >-
       Security preset. "none": no guardrails. "standard": PII scanning + audit.
       "strict": PII + injection defense + audit + network deny-all.
-    form: llm
     options:
       - value: none
         label:
@@ -87,10 +86,10 @@ parameters:
       - value: strict
         label:
           en_US: Strict (PII + Injection + Audit + Network deny-all)
-
   - name: allowed_domains
     type: string
     required: false
+    form: llm
     label:
       en_US: Allowed Domains
     human_description:
@@ -98,8 +97,3 @@ parameters:
     llm_description: >-
       Comma-separated list of domains allowed for outbound network access
       (e.g. "pypi.org,github.com"). Overrides network deny-all.
-    form: llm
-
-extra:
-  python:
-    source: tools/create_sandbox.py

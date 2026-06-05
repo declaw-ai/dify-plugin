@@ -1,23 +1,20 @@
-identity:
-  name: kill_sandbox
-  author: declaw
-  label:
-    en_US: Kill Sandbox
-
 description:
   human:
     en_US: Destroy a Declaw sandbox and release its resources.
   llm: Destroy a sandbox and release its resources.
-
+extra:
+  python:
+    source: tools/kill_sandbox.py
+identity:
+  author: declaw
+  label:
+    en_US: Kill Sandbox
+  name: kill_sandbox
 parameters:
   - name: sandbox_id
     type: string
     required: true
+    form: llm
     label:
       en_US: Sandbox ID
     llm_description: Sandbox ID to destroy.
-    form: llm
-
-extra:
-  python:
-    source: tools/kill_sandbox.py
