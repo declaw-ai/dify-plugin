@@ -1,0 +1,27 @@
+version: 0.0.1
+type: plugin
+author: declaw
+name: declaw
+label:
+  en_US: Declaw — Secure AI Sandboxes
+description:
+  en_US: >-
+    Secure runtime for AI agents. Run AI agents and their tools in Firecracker
+    microVMs with network policies, PII scanning, prompt injection defense,
+    and audit logging.
+icon: _assets/icon.svg
+category: utilities
+tags:
+  - productivity
+  - utilities
+created_at: 2026-06-05T00:00:00Z
+resource:
+  permission:
+    tool:
+      enabled: true
+    storage:
+      enabled: false
+    endpoint:
+      enabled: false
+privacy:
+  collect_data: false

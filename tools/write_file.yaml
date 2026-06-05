@@ -1,0 +1,39 @@
+identity:
+  name: write_file
+  author: declaw
+  label:
+    en_US: Write File
+
+description:
+  human:
+    en_US: Write text content to a file in a Declaw sandbox.
+  llm: Write text content to a file in a sandbox. Creates parent directories automatically.
+
+parameters:
+  - name: sandbox_id
+    type: string
+    required: true
+    label:
+      en_US: Sandbox ID
+    llm_description: Sandbox ID returned by create_sandbox.
+    form: llm
+
+  - name: path
+    type: string
+    required: true
+    label:
+      en_US: File Path
+    llm_description: Absolute file path to write (e.g. /tmp/script.py).
+    form: llm
+
+  - name: content
+    type: string
+    required: true
+    label:
+      en_US: Content
+    llm_description: Text content to write to the file.
+    form: llm
+
+extra:
+  python:
+    source: tools/write_file.py
