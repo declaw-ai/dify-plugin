@@ -17,6 +17,8 @@ parameters:
     form: llm
     label:
       en_US: Sandbox ID
+    human_description:
+      en_US: Sandbox ID returned by create_sandbox.
     llm_description: Sandbox ID returned by create_sandbox.
   - name: path
     type: string
@@ -25,4 +27,6 @@ parameters:
     form: llm
     label:
       en_US: Directory Path
+    human_description:
+      en_US: Directory path to list. Default is /.
     llm_description: Directory path to list. Default is /.

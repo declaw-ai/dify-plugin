@@ -17,4 +17,6 @@ parameters:
     form: llm
     label:
       en_US: Sandbox ID
+    human_description:
+      en_US: Sandbox ID to destroy.
     llm_description: Sandbox ID to destroy.
