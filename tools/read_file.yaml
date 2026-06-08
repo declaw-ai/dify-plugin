@@ -17,6 +17,8 @@ parameters:
     form: llm
     label:
       en_US: Sandbox ID
+    human_description:
+      en_US: Sandbox ID returned by create_sandbox.
     llm_description: Sandbox ID returned by create_sandbox.
   - name: path
     type: string
@@ -24,4 +26,6 @@ parameters:
     form: llm
     label:
       en_US: File Path
+    human_description:
+      en_US: Absolute file path to read (e.g. /tmp/output.txt).
     llm_description: Absolute file path to read (e.g. /tmp/output.txt).

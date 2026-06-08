@@ -19,6 +19,8 @@ parameters:
     form: llm
     label:
       en_US: Sandbox ID
+    human_description:
+      en_US: Sandbox ID returned by create_sandbox.
     llm_description: Sandbox ID returned by create_sandbox.
   - name: command
     type: string
@@ -26,6 +28,8 @@ parameters:
     form: llm
     label:
       en_US: Command
+    human_description:
+      en_US: Shell command to execute.
     llm_description: Shell command to execute.
   - name: timeout
     type: number
@@ -34,6 +38,8 @@ parameters:
     form: llm
     label:
       en_US: Timeout (seconds)
+    human_description:
+      en_US: Command timeout in seconds. Default 30.
     llm_description: Command timeout in seconds. Default 30.
     min: 1
     max: 3600

@@ -1,2 +1,2 @@
 declaw>=1.1.8
-dify_plugin>=0.1.0
+dify_plugin>=0.9.0

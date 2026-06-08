@@ -17,6 +17,8 @@ parameters:
     form: llm
     label:
       en_US: Sandbox ID
+    human_description:
+      en_US: Sandbox ID returned by create_sandbox.
     llm_description: Sandbox ID returned by create_sandbox.
   - name: path
     type: string
@@ -24,6 +26,8 @@ parameters:
     form: llm
     label:
       en_US: File Path
+    human_description:
+      en_US: Absolute file path to write (e.g. /tmp/script.py).
     llm_description: Absolute file path to write (e.g. /tmp/script.py).
   - name: content
     type: string
@@ -31,4 +35,6 @@ parameters:
     form: llm
     label:
       en_US: Content
+    human_description:
+      en_US: Text content to write to the file.
     llm_description: Text content to write to the file.
