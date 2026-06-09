@@ -1,0 +1,103 @@
+description:
+  human:
+    en_US: Run a Python or JavaScript snippet in a secure ephemeral sandbox and get its output.
+  llm: >-
+    Execute a Python or JavaScript code snippet inside an isolated Firecracker
+    microVM and return stdout, stderr, and exit code. The sandbox is created
+    and destroyed automatically for each call — no sandbox_id needed. Use this
+    as a one-shot code interpreter; use create_sandbox + run_command instead
+    when you need a persistent session across multiple steps.
+extra:
+  python:
+    source: tools/run_code.py
+identity:
+  author: declaw
+  label:
+    en_US: Run Code
+  name: run_code
+parameters:
+  - name: code
+    type: string
+    required: true
+    form: llm
+    label:
+      en_US: Code
+    human_description:
+      en_US: The Python or JavaScript source code to execute.
+    llm_description: The source code to execute. Must match the selected language.
+  - name: language
+    type: select
+    required: false
+    default: python
+    form: llm
+    label:
+      en_US: Language
+    human_description:
+      en_US: Programming language to run (Python or JavaScript).
+    llm_description: >-
+      Language of the code. "python" runs on the python template (python3),
+      "javascript" runs on the node template (node).
+    options:
+      - value: python
+        label:
+          en_US: Python
+      - value: javascript
+        label:
+          en_US: JavaScript
+  - name: timeout
+    type: number
+    required: false
+    default: 30
+    form: llm
+    label:
+      en_US: Timeout (seconds)
+    human_description:
+      en_US: Execution timeout in seconds (1-3600). Default 30.
+    llm_description: Maximum seconds the code may run before it is terminated. Default 30.
+    min: 1
+    max: 3600
+  - name: security_preset
+    type: select
+    required: false
+    default: standard
+    form: llm
+    label:
+      en_US: Security Preset
+    human_description:
+      en_US: Security guardrails level.
+    llm_description: >-
+      Security preset. "none": no guardrails. "standard": PII scanning + audit.
+      "strict": PII + injection defense + audit + network deny-all.
+    options:
+      - value: none
+        label:
+          en_US: None
+      - value: standard
+        label:
+          en_US: Standard (PII + Audit)
+      - value: strict
+        label:
+          en_US: Strict (PII + Injection + Audit + Network deny-all)
+  - name: allowed_domains
+    type: string
+    required: false
+    form: llm
+    label:
+      en_US: Allowed Domains
+    human_description:
+      en_US: Comma-separated domain allowlist for outbound network access.
+    llm_description: >-
+      Comma-separated list of domains the code is allowed to reach for outbound
+      network access (e.g. "pypi.org,github.com"). Overrides network deny-all.
+  - name: output_files
+    type: string
+    required: false
+    form: llm
+    label:
+      en_US: Output Files
+    human_description:
+      en_US: Comma-separated file paths to read back after the code runs.
+    llm_description: >-
+      Comma-separated list of file paths to read from the sandbox after
+      execution (e.g. "/home/user/result.json"). Returned as text under
+      output_files. Intended for text/data files, not binaries.
