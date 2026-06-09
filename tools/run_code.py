@@ -17,6 +17,15 @@ LANGUAGE_CONFIG = {
     "javascript": ("node", "/home/user/main.js", "node /home/user/main.js"),
 }
 
+# Normalize common variants an LLM may pass (case, abbreviations).
+LANGUAGE_ALIASES = {
+    "py": "python",
+    "python3": "python",
+    "js": "javascript",
+    "node": "javascript",
+    "nodejs": "javascript",
+}
+
 
 class RunCodeTool(Tool):
     def _invoke(
@@ -26,7 +35,8 @@ class RunCodeTool(Tool):
         domain = self.runtime.credentials.get("declaw_domain") or None
 
         code = tool_parameters["code"]
-        language = tool_parameters.get("language", "python")
+        language = str(tool_parameters.get("language", "python")).strip().lower()
+        language = LANGUAGE_ALIASES.get(language, language)
         timeout = int(tool_parameters.get("timeout", 30))
         preset = tool_parameters.get("security_preset", "standard")
         allowed_domains_str = tool_parameters.get("allowed_domains", "")
