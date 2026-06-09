@@ -6,6 +6,7 @@ Secure sandbox execution for AI agents in [Dify](https://dify.ai). Run AI agents
 
 | Tool | Description |
 |------|-------------|
+| `run_code` | Run a Python or JavaScript snippet in an ephemeral sandbox (one-shot code interpreter) |
 | `create_sandbox` | Create a secure sandbox with configurable security policies |
 | `run_command` | Execute a shell command inside a sandbox |
 | `read_file` | Read a file from a sandbox |

@@ -36,6 +36,7 @@ identity:
     - utilities
 tools:
   - tools/create_sandbox.yaml
+  - tools/run_code.yaml
   - tools/run_command.yaml
   - tools/read_file.yaml
   - tools/write_file.yaml
